@@ -63,14 +63,14 @@ public class Main {
                         System.out.println("The file is empty");
                     } else {
                         try {
-                            System.out.println("Enter your choice to Update");
-                            Integer updateChoice = new Integer(scanner.nextLine());
-                            if (currentUsername.getDescription()[updateChoice - 1] == null) {
+                            System.out.println("UPDATE:");
+                          int valueForUpdate=Main.getTheChoice();
+                            if (currentUsername.getDescription()[valueForUpdate - 1] == null) {
                                 System.out.println("There is no value for update,you can able to stored the description in your choice");
                             } else {
                                 System.out.println("Enter your update description");
                                 String updateDescription = scanner.nextLine();
-                                currentUsername.getDescription()[updateChoice - 1] = updateDescription;
+                                currentUsername.getDescription()[valueForUpdate - 1] = updateDescription;
                             }
                         } catch (Exception e) {
                             System.out.println("Invalided Input ");
@@ -79,17 +79,17 @@ public class Main {
                     }
                 } else if (choice==4) {
                    boolean check=Main.checkDescription(currentUsername);
-                    if (!check) {
+                    if (check) {
                         System.out.println("The file is empty");
                     } else {
                         try {
-                            System.out.println("Enter your delete choice");
-                            Integer deleteChoice = new Integer(scanner.nextLine());
-                            if(currentUsername.getDescription()[deleteChoice-1]==null){
+                            System.out.println("DELETE");
+                           int valueForDelete=Main.getTheChoice();
+                            if(currentUsername.getDescription()[valueForDelete-1]==null){
                                 System.out.println("There is no description for delete");
                             }
                             else {
-                                currentUsername.getDescription()[deleteChoice - 1] = null;
+                                currentUsername.getDescription()[valueForDelete - 1] = null;
                                 for (int i = 0; i < currentUsername.getDescription().length; i++) {
                                     if (currentUsername.getDescription()[i] != null) {
                                         continue;
@@ -136,7 +136,7 @@ public class Main {
             }
         }
     }
-
+    static Scanner sc=new Scanner(System.in);
     public static boolean checkDescription(User userAddress) {//this is the similar method for add,update,list and  delete// this is the static method so this method does not need the object
         boolean thereIsNoAnyValue = true;
         for (int i = 0; i < userAddress.getDescription().length; i++) {
@@ -152,8 +152,10 @@ public class Main {
         }
         return thereIsNoAnyValue;
     }
-    public static void getTheChoice(int choice){
-
+    public static int getTheChoice(){
+        System.out.print("Enter your choice ");
+        Integer choiceToUpdateAndDelete = new Integer(sc.nextLine());
+        return choiceToUpdateAndDelete;
     }
 }
 
